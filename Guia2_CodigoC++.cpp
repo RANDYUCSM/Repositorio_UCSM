@@ -121,10 +121,10 @@ class Carro{
     Rueda rue3;
     Rueda rue4;
     public:
-    Carro(int r1,int r2,int r3,int r4) : rue1(r1),rue2(r2),rue3(r3),rue4(r4) {
+    Carro(int r1,int r2,int r3,int r4) : rue1(r1),rue2(r2),rue3(r3),rue4(r4) { //Inicializacion de miembros objetos
         Mover_carro();
         cout<<"Size de ruedas: "<<r1<<", "<<r2<<", "<<r3<<", "<<r4<<endl;
-    } //Inicializacion de miembros objetos
+    } 
     void Mover_carro(){
         cout<<"El carro se esta moviendo..."<<endl;
     }
