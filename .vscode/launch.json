@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/USER/Documents/GitHub/JesusCondoriUCSM",
-      "program": "c:/Users/USER/Documents/GitHub/JesusCondoriUCSM/build/Debug/outDebug",
+      "cwd": "c:/Users/MI PC/OneDrive/Documentos/ANA/c++/Repositorio_UCSM",
+      "program": "c:/Users/MI PC/OneDrive/Documentos/ANA/c++/Repositorio_UCSM/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
