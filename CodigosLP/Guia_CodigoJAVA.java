@@ -207,3 +207,49 @@ public class Inventario {
         }
     }
 }
+//Ejercicio 3
+import java.util.Scanner;
+
+class Avion {
+    private String destino;
+    private int duracionMision; // en horas
+    private int tripulacionNecesaria;
+    private int combustibleActual; // en litros
+
+    public Avion(String dest, int duracion, int tripulacion, int combustible) {
+        destino = dest;
+        duracionMision = duracion;
+        tripulacionNecesaria = tripulacion;
+        combustibleActual = combustible;
+    }
+
+    public void simularMision() {
+        if (combustibleActual >= duracionMision * 10) {
+            System.out.println("La misión hacia " + destino + " ha sido completada con éxito.");
+        } else {
+            System.out.println("El avión no tiene suficiente combustible para completar la misión hacia " + destino + ".");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Bienvenido al Programa de Simulación de Vuelo");
+        System.out.print("Ingrese el destino de la misión: ");
+        String destino = scanner.nextLine();
+
+        System.out.print("Ingrese la duración estimada de la misión en horas: ");
+        int duracionMision = scanner.nextInt();
+
+        System.out.print("Ingrese la cantidad de tripulación necesaria para la misión: ");
+        int tripulacionNecesaria = scanner.nextInt();
+
+        System.out.print("Ingrese la cantidad de combustible actual del avión en litros: ");
+        int combustibleActual = scanner.nextInt();
+
+        Avion avion = new Avion(destino, duracionMision, tripulacionNecesaria, combustibleActual);
+        avion.simularMision();
+
+        scanner.close();
+    }
+}
