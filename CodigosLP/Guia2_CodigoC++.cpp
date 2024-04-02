@@ -446,3 +446,54 @@ int main(){
     }
     return 0;
 }
+//Ejercicio 3
+#include <iostream>
+
+using namespace std;
+
+class Avion {
+private:
+    string destino;
+    int duracionMision; // en horas
+    int tripulacionNecesaria;
+    int combustibleActual; // en litros
+
+public:
+    Avion(string dest, int duracion, int tripulacion, int combustible) {
+        destino = dest;
+        duracionMision = duracion;
+        tripulacionNecesaria = tripulacion;
+        combustibleActual = combustible;
+    }
+
+    void simularMision() {
+        if (combustibleActual >= duracionMision * 10) {
+            cout << "La misión hacia " << destino << " ha sido completada con éxito." << endl;
+        } else {
+            cout << "El avión no tiene suficiente combustible para completar la misión hacia " << destino << "." << endl;
+        }
+    }
+};
+
+int main() {
+    char destino[100];
+    int duracionMision, tripulacionNecesaria, combustibleActual;
+
+    cout << "Bienvenido al Programa de Simulación de Vuelo" << endl;
+    cout << "Ingrese el destino de la misión: ";
+    cin.getline(destino, 100);
+
+    cout << "Ingrese la duración estimada de la misión en horas: ";
+    cin >> duracionMision;
+
+    cout << "Ingrese la cantidad de tripulación necesaria para la misión: ";
+    cin >> tripulacionNecesaria;
+
+    cout << "Ingrese la cantidad de combustible actual del avión en litros: ";
+    cin >> combustibleActual;
+
+    Avion avion(destino, duracionMision, tripulacionNecesaria, combustibleActual);
+    avion.simularMision();
+
+    return 0;
+}
