@@ -149,3 +149,26 @@ if _name_ == "_main_":
             inventario.FacturasCliente()
         elif opc == 6:
             break
+
+#Ejercicio 3
+class Avion:
+    def __init__(self, dest, duracion, tripulacion, combustible):
+        self.destino = dest
+        self.duracionMision = duracion
+        self.tripulacionNecesaria = tripulacion
+        self.combustibleActual = combustible
+
+    def simularMision(self):
+        if self.combustibleActual >= self.duracionMision * 10:
+            print(f"La misión hacia {self.destino} ha sido completada con éxito.")
+        else:
+            print(f"El avión no tiene suficiente combustible para completar la misión hacia {self.destino}.")
+
+if __name__ == "__main__":
+    destino = input("Bienvenido al Programa de Simulación de Vuelo\nIngrese el destino de la misión: ")
+    duracionMision = int(input("Ingrese la duración estimada de la misión en horas: "))
+    tripulacionNecesaria = int(input("Ingrese la cantidad de tripulación necesaria para la misión: "))
+    combustibleActual = int(input("Ingrese la cantidad de combustible actual del avión en litros: "))
+
+    avion = Avion(destino, duracionMision, tripulacionNecesaria, combustibleActual)
+    avion.simularMision()
