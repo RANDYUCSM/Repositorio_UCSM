@@ -4,7 +4,6 @@ using namespace std;
 //ACTIVIDADES
 //ACTIVIDAD 1.
 
-
 //ACTIVIDAD 2.
 
 //ACTIVIDAD 3.
@@ -12,7 +11,7 @@ using namespace std;
 //ACTIVIDAD 4.
 
     //1.-
-/*
+
 class Libro{
     string autor;
     string titulo;
@@ -104,7 +103,7 @@ int main(){
     }
     return 0;
 }
-*/
+
   //3.-
 
 class Rueda{
@@ -121,10 +120,10 @@ class Carro{
     Rueda rue3;
     Rueda rue4;
     public:
-    Carro(int r1,int r2,int r3,int r4) : rue1(r1),rue2(r2),rue3(r3),rue4(r4) {
+    Carro(int r1,int r2,int r3,int r4) : rue1(r1),rue2(r2),rue3(r3),rue4(r4) { //Inicializacion de miembros objetos
         Mover_carro();
         cout<<"Size de ruedas: "<<r1<<", "<<r2<<", "<<r3<<", "<<r4<<endl;
-    } //Inicializacion de miembros objetos
+    } 
     void Mover_carro(){
         cout<<"El carro se esta moviendo..."<<endl;
     }
@@ -143,3 +142,65 @@ int main(){
     car.Cambiar_ruedas(18,18,18,18);
     return 0;
 }
+
+
+  //4.-
+
+class Tienda{
+    public:
+    string P1[5]={"arroz","lenteja","pallar","frejol","atun"};
+    string C[6];
+
+};
+class Cliente{
+    string producto;
+    string opc;
+    public:
+    int suma;
+    void Agregar_prod_compras(Tienda tienda){
+        suma=0;
+        opc="s";
+        while ((opc!="N" and opc!="n") and suma<6){
+            cout<<"Ingrese el producto al carrito"<<endl;
+            for(int x=0;x<5;x++)
+            {
+                cout<<"--"<<tienda.P1[x]<<endl;
+            }
+            cin>>producto;
+            bool encontrar=false;
+            for(const auto& item:tienda.P1){
+                if(item==producto){
+                    tienda.C[suma]=producto;
+                    suma+=1;
+                    encontrar=true;
+                    break;
+                }
+            }
+            if(!encontrar){
+                cout<<"El producto no se encuentra disponible "<<endl;
+
+            }
+
+            cout<<"Desea continuar ingresando? S/N"<<endl;
+            cin>>opc;
+        }
+        
+    }
+    int getSuma(){
+        return suma;
+    }
+    void Pagar_cuenta(int s){
+        cout<<"El precio total es: "<<4.6*s<<endl;
+        
+    }
+
+};
+int main(){
+    Cliente cli;
+    Tienda tienda;
+    cli.Agregar_prod_compras(tienda);
+    cli.Pagar_cuenta(cli.getSuma());
+    cout<<"Se pago la cuenta"<<endl;
+}
+
+
