@@ -1,6 +1,154 @@
 #Ejercicio 1
 
 #Ejercicio 2
+class Proveedor:
+    def __init__(self, nombre):
+        self.nombre = nombre
+
+    def get_nombre(self):
+        return self.nombre
+
+
+class Cliente:
+    def __init__(self, nombre, direccion, telefono):
+        self.nombre = nombre
+        self.direccion = direccion
+        self.telefono = telefono
+        self.compras_realizadas = []
+        self.pagos_realizados = []
+
+    def get_nombre(self):
+        return self.nombre
+
+    def get_direccion(self):
+        return self.direccion
+
+    def get_telefono(self):
+        return self.telefono
+
+    def agregar_compra(self, compra):
+        self.compras_realizadas.append(compra)
+
+    def agregar_pago(self, pago):
+        self.pagos_realizados.append(pago)
+
+    def mostrar_info_cliente(self):
+        print("Nombre:", self.nombre)
+        print("Dirección:", self.direccion)
+        print("Teléfono:", self.telefono)
+        print("Compras Realizadas:")
+        for compra in self.compras_realizadas:
+            print("---- Producto:", compra.get_producto_asociado().get_descripcion())
+            print("---- Cantidad:", compra.get_cantidad())
+            print("---- Precio unitario:", compra.get_producto_asociado().get_precio())
+            print("---- Fecha:", compra.get_venta_asociada().get_fecha())
+        print("Pagos:")
+        for pago in self.pagos_realizados:
+            print(pago.get_monto())
+
+
+class Producto:
+    def __init__(self, codigo, descripcion, precio, proveedor):
+        self.codigo = codigo
+        self.descripcion = descripcion
+        self.precio = precio
+        self.proveedor_asociado = proveedor
+
+    def get_codigo(self):
+        return self.codigo
+
+    def get_descripcion(self):
+        return self.descripcion
+
+    def get_precio(self):
+        return self.precio
+
+    def get_proveedor(self):
+        return self.proveedor_asociado
+
+
+class Venta:
+    def __init__(self, num_factura, fecha, cliente):
+        self.num_factura = num_factura
+        self.fecha = fecha
+        self.cliente_asociado = cliente
+        self.productos_vendidos = []
+
+    def get_num_factura(self):
+        return self.num_factura
+
+    def get_fecha(self):
+        return self.fecha
+
+    def get_cliente(self):
+        return self.cliente_asociado
+
+    def agregar_producto(self, producto):
+        self.productos_vendidos.append(producto)
+
+    def mostrar_info_venta(self):
+        print("-----------------------------------------")
+        print("Número de factura:", self.num_factura)
+        print("Fecha:", self.fecha)
+        print("Cliente:", self.cliente_asociado.get_nombre())
+        print("Descripción:")
+        for producto in self.productos_vendidos:
+            print(producto.get_descripcion())
+        print("-----------------------------------------")
+
+
+class Compra:
+    def __init__(self, cliente, producto, venta, cantidad):
+        self.cliente_asociado = cliente
+        self.producto_asociado = producto
+        self.venta_asociada = venta
+        self.cant_comprada = cantidad
+
+    def get_cliente_asociado(self):
+        return self.cliente_asociado
+
+    def get_producto_asociado(self):
+        return self.producto_asociado
+
+    def get_venta_asociada(self):
+        return self.venta_asociada
+
+    def get_cantidad(self):
+        return self.cant_comprada
+
+
+class Pago:
+    def __init__(self, cliente, monto, fecha_pago):
+        self.cliente_asociado = cliente
+        self.monto = monto
+        self.fecha_pago = fecha_pago
+
+    def get_cliente(self):
+        return self.cliente_asociado
+
+    def get_monto(self):
+        return self.monto
+
+    def get_fecha_pago(self):
+        return self.fecha_pago
+
+
+# Objetos
+proveedor = Proveedor("Nombre_prov1")
+producto = Producto(1234, "Pantalon", 100, proveedor)
+cliente = Cliente("Mario", "Direc_prueba", 123456789)
+venta = Venta("A123", "Fecha_prueba", cliente)
+compra = Compra(cliente, producto, venta, 2)
+pago = Pago(cliente, 200, "Fecha_prueba")
+
+# Agregar compra y pago
+cliente.agregar_compra(compra)
+cliente.agregar_pago(pago)
+venta.agregar_producto(producto)
+
+# Mostrar información
+cliente.mostrar_info_cliente()
+venta.mostrar_info_venta()
 
 #Ejercicio 3
 import collections
