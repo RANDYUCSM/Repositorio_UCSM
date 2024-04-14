@@ -361,4 +361,82 @@ venta1.agregar_producto(prod1)
 # Mostrar informacion
 cli1.mostrar_info_cliente()
 venta1.mostrar_info_venta()
+//Ejercicio 3
+class Profesor:
+    def __init__(self, nombre, direccion, telefono):
+        self.nombre = nombre
+        self.direccion = direccion
+        self.telefono = telefono
+        self.asignaturas = []
+
+    def agregar_asignatura(self, asignatura):
+        self.asignaturas.append(asignatura)
+
+
+class Asignatura:
+    def __init__(self, codigo, nombre, descripcion, profesor):
+        self.codigo = codigo
+        self.nombre = nombre
+        self.descripcion = descripcion
+        self.profesor = profesor
+        self.estudiantes = []
+
+    def agregar_estudiante(self, estudiante):
+        self.estudiantes.append(estudiante)
+
+
+class Estudiante:
+    def __init__(self, nombre, direccion, matricula):
+        self.nombre = nombre
+        self.direccion = direccion
+        self.matricula = matricula
+        self.asignaturas = []
+
+
+# Solicitar datos del profesor
+nombre_profesor = input("Ingrese el nombre del profesor: ")
+direccion_profesor = input("Ingrese la dirección del profesor: ")
+telefono_profesor = input("Ingrese el teléfono del profesor: ")
+
+# Crear objeto Profesor
+profesor = Profesor(nombre_profesor, direccion_profesor, telefono_profesor)
+
+# Solicitar datos de la asignatura
+codigo_asignatura = input("Ingrese el código de la asignatura: ")
+nombre_asignatura = input("Ingrese el nombre de la asignatura: ")
+descripcion_asignatura = input("Ingrese la descripción de la asignatura: ")
+
+# Crear objeto Asignatura y asociarlo al profesor
+asignatura = Asignatura(codigo_asignatura, nombre_asignatura, descripcion_asignatura, profesor)
+profesor.agregar_asignatura(asignatura)
+
+# Solicitar datos del estudiante
+nombre_estudiante = input("Ingrese el nombre del estudiante: ")
+direccion_estudiante = input("Ingrese la dirección del estudiante: ")
+matricula_estudiante = input("Ingrese la matrícula del estudiante: ")
+
+# Crear objeto Estudiante
+estudiante = Estudiante(nombre_estudiante, direccion_estudiante, matricula_estudiante)
+
+# Agregar la asignatura al estudiante
+estudiante.asignaturas.append(asignatura)
+asignatura.agregar_estudiante(estudiante)
+
+# Imprimir información
+print("\nInformación del profesor:")
+print("Nombre:", profesor.nombre)
+print("Dirección:", profesor.direccion)
+print("Teléfono:", profesor.telefono)
+
+print("\nInformación de la asignatura:")
+print("Código:", asignatura.codigo)
+print("Nombre:", asignatura.nombre)
+print("Descripción:", asignatura.descripcion)
+print("Profesor:", asignatura.profesor.nombre)
+
+print("\nInformación del estudiante:")
+print("Nombre:", estudiante.nombre)
+print("Dirección:", estudiante.direccion)
+print("Matrícula:", estudiante.matricula)
+print("Asignaturas matriculadas:", [asig.nombre for asig in estudiante.asignaturas])
 
