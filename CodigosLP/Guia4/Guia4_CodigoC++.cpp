@@ -1,8 +1,4 @@
 //Ejercicio 1
-
-//Ejercicio 2
-
-//Ejercicio 3
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -147,3 +143,6 @@ int main(){
     return 0;
 }
 
+//Ejercicio 2
+
+//Ejercicio 3
