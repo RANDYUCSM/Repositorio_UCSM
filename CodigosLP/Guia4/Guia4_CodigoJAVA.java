@@ -405,3 +405,124 @@ public class Main {
 }
 
 //Ejercicio 3
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Profesor {
+    private String nombre;
+    private String direccion;
+    private String telefono;
+    private ArrayList<Asignatura> asignaturas;
+
+    public Profesor(String nombre, String direccion, String telefono) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.asignaturas = new ArrayList<>();
+    }
+
+    public void agregarAsignatura(Asignatura asignatura) {
+        asignaturas.add(asignatura);
+    }
+
+    // Getters y setters
+}
+
+class Asignatura {
+    private String codigo;
+    private String nombre;
+    private String descripcion;
+    private Profesor profesor;
+    private ArrayList<Estudiante> estudiantes;
+
+    public Asignatura(String codigo, String nombre, String descripcion, Profesor profesor) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.profesor = profesor;
+        this.estudiantes = new ArrayList<>();
+    }
+
+    public void agregarEstudiante(Estudiante estudiante) {
+        estudiantes.add(estudiante);
+    }
+
+    // Getters y setters
+}
+
+class Estudiante {
+    private String nombre;
+    private String direccion;
+    private String matricula;
+
+    public Estudiante(String nombre, String direccion, String matricula) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.matricula = matricula;
+    }
+
+    // Getters y setters
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Ingresar datos del profesor
+        System.out.println("Ingrese el nombre del profesor: ");
+        String nombreProfesor = scanner.nextLine();
+        System.out.println("Ingrese la dirección del profesor: ");
+        String direccionProfesor = scanner.nextLine();
+        System.out.println("Ingrese el teléfono del profesor: ");
+        String telefonoProfesor = scanner.nextLine();
+
+        // Crear objeto Profesor
+        Profesor profesor = new Profesor(nombreProfesor, direccionProfesor, telefonoProfesor);
+
+        // Ingresar datos de la asignatura
+        System.out.println("Ingrese el código de la asignatura: ");
+        String codigoAsignatura = scanner.nextLine();
+        System.out.println("Ingrese el nombre de la asignatura: ");
+        String nombreAsignatura = scanner.nextLine();
+        System.out.println("Ingrese la descripción de la asignatura: ");
+        String descripcionAsignatura = scanner.nextLine();
+
+        // Crear objeto Asignatura y asociarlo al profesor
+        Asignatura asignatura = new Asignatura(codigoAsignatura, nombreAsignatura, descripcionAsignatura, profesor);
+        profesor.agregarAsignatura(asignatura);
+
+        // Ingresar datos del estudiante
+        System.out.println("Ingrese el nombre del estudiante: ");
+        String nombreEstudiante = scanner.nextLine();
+        System.out.println("Ingrese la dirección del estudiante: ");
+        String direccionEstudiante = scanner.nextLine();
+        System.out.println("Ingrese la matrícula del estudiante: ");
+        String matriculaEstudiante = scanner.nextLine();
+
+        // Crear objeto Estudiante
+        Estudiante estudiante = new Estudiante(nombreEstudiante, direccionEstudiante, matriculaEstudiante);
+
+        // Agregar la asignatura al estudiante
+        estudiante.agregarAsignatura(asignatura);
+        asignatura.agregarEstudiante(estudiante);
+
+        // Imprimir información
+        System.out.println("\nInformación del profesor:");
+        System.out.println("Nombre: " + profesor.getNombre());
+        System.out.println("Dirección: " + profesor.getDireccion());
+        System.out.println("Teléfono: " + profesor.getTelefono());
+
+        System.out.println("\nInformación de la asignatura:");
+        System.out.println("Código: " + asignatura.getCodigo());
+        System.out.println("Nombre: " + asignatura.getNombre());
+        System.out.println("Descripción: " + asignatura.getDescripcion());
+        System.out.println("Profesor: " + asignatura.getProfesor().getNombre());
+
+        System.out.println("\nInformación del estudiante:");
+        System.out.println("Nombre: " + estudiante.getNombre());
+        System.out.println("Dirección: " + estudiante.getDireccion());
+        System.out.println("Matrícula: " + estudiante.getMatricula());
+    }
+}
+
