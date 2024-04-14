@@ -1,8 +1,5 @@
 //Ejercicio 1
 
-//Ejercicio 2
-
-//Ejercicio 3
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -188,3 +185,7 @@ public class Main {
         biblioteca.MostrarDatosUsuarios();
     }
 }
+
+//Ejercicio 2
+
+//Ejercicio 3
