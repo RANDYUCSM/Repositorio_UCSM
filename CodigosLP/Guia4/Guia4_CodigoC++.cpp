@@ -361,3 +361,130 @@ int main(){
     return 0;
 }
 //Ejercicio 3
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+// Declaración adelantada de las clases para que la clase Profesor pueda usarlas
+class Asignatura;
+class Estudiante;
+
+class Profesor {
+private:
+    std::string nombre;
+    std::string direccion;
+    std::string telefono;
+    std::vector<Asignatura*> asignaturas;
+
+public:
+    Profesor(std::string n, std::string d, std::string t) : nombre(n), direccion(d), telefono(t) {}
+
+    std::string getNombre() { return nombre; }
+    std::string getDireccion() { return direccion; }
+    std::string getTelefono() { return telefono; }
+
+    void addAsignatura(Asignatura* a) { asignaturas.push_back(a); }
+    std::vector<Asignatura*>& getAsignaturas() { return asignaturas; }
+};
+
+class Asignatura {
+private:
+    std::string codigo;
+    std::string nombre;
+    std::string descripcion;
+    Profesor* profesor;
+    std::vector<Estudiante*> estudiantes;
+
+public:
+    Asignatura(std::string c, std::string n, std::string d, Profesor* p) : codigo(c), nombre(n), descripcion(d), profesor(p) {}
+
+    std::string getCodigo() { return codigo; }
+    std::string getNombre() { return nombre; }
+    std::string getDescripcion() { return descripcion; }
+    Profesor* getProfesor() { return profesor; }
+
+    void addEstudiante(Estudiante* e) { estudiantes.push_back(e); }
+    std::vector<Estudiante*>& getEstudiantes() { return estudiantes; }
+};
+
+class Estudiante {
+private:
+    std::string nombre;
+    std::string direccion;
+    std::string matricula;
+    std::vector<Asignatura*> asignaturas;
+
+public:
+    Estudiante(std::string n, std::string d, std::string m) : nombre(n), direccion(d), matricula(m) {}
+
+    std::string getNombre() { return nombre; }
+    std::string getDireccion() { return direccion; }
+    std::string getMatricula() { return matricula; }
+
+    void addAsignatura(Asignatura* a) { asignaturas.push_back(a); }
+    std::vector<Asignatura*>& getAsignaturas() { return asignaturas; }
+};
+
+class Nota {
+private:
+    float valor;
+    Estudiante* estudiante;
+    Asignatura* asignatura;
+
+public:
+    Nota(float v, Estudiante* e, Asignatura* a) : valor(v), estudiante(e), asignatura(a) {}
+
+    float getValor() { return valor; }
+    Estudiante* getEstudiante() { return estudiante; }
+    Asignatura* getAsignatura() { return asignatura; }
+};
+
+class Falta {
+private:
+    int cantidad;
+    Estudiante* estudiante;
+    Asignatura* asignatura;
+
+public:
+    Falta(int c, Estudiante* e, Asignatura* a) : cantidad(c), estudiante(e), asignatura(a) {}
+
+    int getCantidad() { return cantidad; }
+    Estudiante* getEstudiante() { return estudiante; }
+    Asignatura* getAsignatura() { return asignatura; }
+};
+
+int main() {
+    std::string nombreProfesor, direccionProfesor, telefonoProfesor;
+    std::string codigoAsignatura, nombreAsignatura, descripcionAsignatura;
+    std::string nombreEstudiante, direccionEstudiante, matriculaEstudiante;
+
+    // Ingresar datos del profesor
+    std::cout << "Ingrese el nombre del profesor: ";
+    std::cin >> nombreProfesor;
+    std::cout << "Ingrese la direccion del profesor: ";
+    std::cin >> direccionProfesor;
+    std::cout << "Ingrese el telefono del profesor: ";
+    std::cin >> telefonoProfesor;
+
+    // Crear un profesor con los datos ingresados
+    Profesor p(nombreProfesor, direccionProfesor, telefonoProfesor);
+
+    // Ingresar datos de la asignatura
+    std::cout << "Ingrese el codigo de la asignatura: ";
+    std::cin >> codigoAsignatura;
+    std::cout << "Ingrese el nombre de la asignatura: ";
+    std::cin >> nombreAsignatura;
+    std::cout << "Ingrese la descripcion de la asignatura: ";
+    std::cin >> descripcionAsignatura;
+
+    // Crear una asignatura con los datos ingresados y asociarla al profesor
+    Asignatura a(codigoAsignatura, nombreAsignatura, descripcionAsignatura, &p);
+
+    // Ingresar datos del estudiante
+    std::cout << "Ingrese el nombre del estudiante: ";
+    std::cin >> nombreEstudiante;
+    std::cout << "Ingrese la direccion del estudiante: ";
+    std::cin >> direccionEstudiante;
+   
+
