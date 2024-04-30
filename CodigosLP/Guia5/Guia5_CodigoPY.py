@@ -4,7 +4,7 @@ class Productos:
         self.__codigo=codigo
         self.__cantidad=cant
     def __del__(self):
-        None
+        pass
     
     def getNombre(self):
         return self.__nombre
@@ -24,7 +24,7 @@ class Tienda:
     def __init__(self,prod):
         self.__producto=prod
     def __del__(self):
-        None
+        pass
     def Mostrar(self):
         print("El producto es",self.__producto.getNombre(),"con codigo",self.__producto.getCodigo())
         print("Stock:",self.__producto.getCantidad())
