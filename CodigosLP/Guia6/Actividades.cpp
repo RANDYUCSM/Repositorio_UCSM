@@ -65,35 +65,51 @@ int main(){
 
 //Actividad 3:
 class Banco{
-    private:
-    static float interes;
     public:
+    static float interes;
     static void cambiar_interes(float i){
         interes=i;
     }
-
 };
+float Banco::interes=0.05;
+
 class CuentaB{
     private:
+    string nombre;
     float saldo;
     public:
-    CuentaB(float s){
+    CuentaB(float s,string n){
         this->saldo=s;
+        this->nombre=n;
     }
     void deposito(float d){
         saldo=saldo+d;
     }
     void retiro(float r){
-        saldo=saldo-r;
+        if (r<saldo){
+            saldo-=r;
+        }
+        else{
+            cout<<"Saldo insuficiente"<<endl;
+        }
+    }
+    double calcular_interes(){
+        double intereses;
+        intereses=saldo*Banco::interes;
+        return intereses;
     }
 
 };
 
 int main(){
     Banco banco;
-    banco.cambiar_interes(0.05);
-    CuentaB cuenta(1500);
-
+    CuentaB cuenta(1500,"Jesus");
+    cuenta.deposito(500);
+    cuenta.retiro(3000);
+    cout<<cuenta.calcular_interes()<<endl;
+    banco.cambiar_interes(0.02);
+    cout<<cuenta.calcular_interes()<<endl;
+    return 0;
 }
 //Actividad 4:
 class Vector{
