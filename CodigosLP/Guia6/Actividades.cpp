@@ -64,4 +64,71 @@ int main(){
 }
 
 //Actividad 3:
+class Banco{
+    private:
+    static float interes;
+    public:
+    static void cambiar_interes(float i){
+        interes=i;
+    }
+
+};
+class CuentaB{
+    private:
+    float saldo;
+    public:
+    CuentaB(float s){
+        this->saldo=s;
+    }
+    void deposito(float d){
+        saldo=saldo+d;
+    }
+    void retiro(float r){
+        saldo=saldo-r;
+    }
+
+};
+
+int main(){
+    Banco banco;
+    banco.cambiar_interes(0.05);
+    CuentaB cuenta(1500);
+
+}
+//Actividad 4:
+class Vector{
+    private:
+    int x;
+    int y;
+    public:
+    Vector(int,int);
+    Vector& operator+(const Vector&);
+    Vector& operator-(const Vector&);
+    void mostrarAtributos(){
+        cout<<"x vale: "<<x<<endl;
+        cout<<"y vale: "<<y<<endl;
+    }
+};
+
+Vector::Vector(int x,int y){
+    this->x=x;
+    this->y=y;
+}
+
+Vector& Vector::operator+(const Vector& v){
+    this->x=this->x+v.x;
+    this->y=this->y+v.y;
+    return *this;
+}
+Vector& Vector::operator-(const Vector& v){
+    this->x=this->x-v.x;
+    this->y=this->y-v.y;
+    return *this;
+}
+int main(){
+    Vector vector1(3,4);
+    Vector vector2(2,7);
+    Vector vector3=vector1+vector2;
+    vector3.mostrarAtributos();
+}
 
