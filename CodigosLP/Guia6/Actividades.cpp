@@ -37,4 +37,31 @@ int main(){
 }
 
 //Actividad 2:
+class Circulo{
+    private:
+    int radio;
+    float diametro;
+    public:
+    Circulo(float d);
+    friend void areaCirculo(Circulo&);
+};
+
+Circulo::Circulo(float d){
+    this->diametro=d;
+    this->radio=d/2;
+}
+
+void areaCirculo(Circulo& c){
+    cout<<"El area del circulo es: "<<3.14*c.radio*c.radio<<endl;
+}
+
+int main(){
+    Circulo circulo1(10);
+    areaCirculo(circulo1);
+    Circulo circulo2(20);
+    areaCirculo(circulo2);
+    return 0;
+}
+
+//Actividad 3:
 
