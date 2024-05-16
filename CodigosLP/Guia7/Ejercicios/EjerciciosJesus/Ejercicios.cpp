@@ -45,4 +45,44 @@ int main(){
 }
 
 //Ejercicio 2
+#include <iostream>
+using namespace std;
+class Persona{
+    private:
+        string nombre;
+        int edad;
+        float salario;
+    protected:
+        string correo_electronico;
+        Persona(string n,int e,float s,string correo):nombre(n),edad(e),salario(s),correo_electronico(correo){}
+        Persona(string n,int e,string correo):nombre(n),edad(e),correo_electronico(correo){}
+        string getNombre(){return nombre;} //getters
+        int getEdad(){return edad;}   
+        float getSalario(){return salario;}   
+
+};
+class Empleado:protected Persona{
+    public:
+    Empleado(string n,int e,float s,string correo):Persona(n,e,s,correo){}
+    void MostrarAtributos(){
+        cout<<"Nombre:"<<getNombre()<<endl<<"Edad:"<<getEdad()<<endl<<"Salario:"<<getSalario()<<"Correo:"<<correo_electronico<<endl;
+    }
+};
+class Cliente:protected Persona{
+    public:
+    Cliente(string n,int e,string correo):Persona(n,e,correo){}
+    void MostrarAtributos(){
+        cout<<"Nombre:"<<getNombre()<<endl<<"Edad:"<<getEdad()<<endl<<"Correo:"<<correo_electronico<<endl;
+    }
+};
+int main(){
+    cout<<"EMPLEADO"<<endl;
+    Empleado empleado("Carlos",19,1500.50,"carlos321@gmail.com");
+    empleado.MostrarAtributos();
+    cout<<"CLIENTE"<<endl;
+    Cliente cliente("Juan",25,"juan3123@gmail.com");
+    cliente.MostrarAtributos();
+    return 0;
+}
+//Ejercicios 3
 
