@@ -85,4 +85,38 @@ int main(){
     return 0;
 }
 //Ejercicios 3
-
+#include <iostream>
+using namespace std;
+class Movil{
+    protected:
+        string marca;
+        string modelo;
+        string sistema_operativo;
+    Movil(string m,string modelo,string sistema):marca(m),modelo(modelo),sistema_operativo(sistema){} //Constructor
+    ~Movil(){}
+};
+class Telefono:protected Movil{
+    public:
+    Telefono(string m,string modelo,string sistema):Movil(m,modelo,sistema){}
+    ~Telefono(){}
+    void MostrarAtributos(){
+        cout<<"Marca:"<<marca<<endl<<"Modelo:"<<modelo<<endl<<"Sistema operativo:"<<sistema_operativo<<endl;
+    }
+};
+class Tablet:protected Movil{
+    public:
+    Tablet(string m,string modelo,string sistema):Movil(m,modelo,sistema){}
+    ~Tablet(){}
+    void MostrarAtributos(){
+        cout<<"Marca:"<<marca<<endl<<"Modelo:"<<modelo<<endl<<"Sistema operativo:"<<sistema_operativo<<endl;
+    }
+};
+int main(){
+    cout<<"TELEFONO"<<endl;
+    Telefono telefono("Samsung","Galaxy S24 Ultra","Android");
+    telefono.MostrarAtributos();
+    cout<<"TABLET"<<endl;
+    Tablet tablet("Apple","iPad Air","iPadOS");
+    tablet.MostrarAtributos();
+    return 0;
+}
