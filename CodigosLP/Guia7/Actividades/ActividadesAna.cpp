@@ -1,214 +1,134 @@
-#include <iostream> 
-#include <string> 
-using namespace std; 
+#include <iostream>
+#include <string>
+using namespace std;
 
-class Cliente { 
-protected: 
-    int DNI; 
-    string nombre; 
-    int edad; 
-    int numCuenta; 
-
-    // Método para encriptar cada dígito del número de cuenta
-    int Encriptar(int num) const { 
-        string numastring = to_string(num); // Convertir número a cadena
-        for (char& digito : numastring) { // Iterar sobre cada carácter de la cadena
-            int valorDigito = digito - '0'; // Convertir carácter a dígito
-            valorDigito = (valorDigito + 7) % 10; // Sumar 7 y tomar módulo 10
-            digito = '0' + valorDigito; // Convertir dígito de vuelta a carácter
+// Clase base "Cliente"
+class Cliente {
+protected:
+    int DNI;
+    string nombre;
+    int edad;
+    int numCuenta;
+    
+    // Método protegido para encriptar la información antes de ser almacenada
+    void Encriptar() {
+        // Encriptar numCuenta sumando 1 a cada dígito
+        int temp = numCuenta;
+        int encriptado = 0;
+        int factor = 1;
+        while (temp > 0) {
+            int digito = temp % 10;
+            digito = (digito + 1) % 10; // Sumamos 1 y nos aseguramos de no superar 9
+            encriptado += digito * factor;
+            factor *= 10;
+            temp /= 10;
         }
-        return stoi(numastring); // Convertir cadena de nuevo a número entero
-    } 
-    
-public: 
-    Cliente(int dni, string nombre, int edad, int numCuenta) : DNI(dni), nombre(nombre), edad(edad), numCuenta(numCuenta) { 
-        this->numCuenta = Encriptar(this->numCuenta); // Encriptar número de cuenta
-    } 
-    
-    int getDNI() const { 
-        return DNI; 
-    } 
+        numCuenta = encriptado;
+    }
 
-    string getNombre() const { 
-        return nombre; 
-    } 
+public:
+    Cliente(int dni, string nombre, int edad, int numCuenta)
+        : DNI(dni), nombre(nombre), edad(edad), numCuenta(numCuenta) {
+        Encriptar();
+    }
 
-    int getEdad() const { 
-        return edad; 
-    } 
+    int getDNI() const {
+        return DNI;
+    }
 
-    int getNumeroCuenta() const { 
-        return numCuenta; 
-    } 
+    string getNombre() const {
+        return nombre;
+    }
 
-    void setDNI(int dni) { 
-        DNI = dni; 
-    } 
+    int getEdad() const {
+        return edad;
+    }
 
-    void setNombre(string nombre) { 
-        this->nombre = nombre;  
-    } 
+    int getNumeroCuenta() const {
+        return numCuenta;
+    }
 
-    void setEdad(int edad) { 
-        this->edad = edad; 
-    } 
+    void setDNI(int dni) {
+        DNI = dni;
+    }
 
-    void setNumeroCuenta(int numeroCuenta) { 
-        numCuenta = Encriptar(numeroCuenta); // Encriptar número de cuenta al establecerlo
-    } 
+    void setNombre(string nombre) {
+        this->nombre = nombre; // usamos el this para distinguir los atributos de la función con los métodos de la clase
+    }
 
-    virtual ~Cliente() { 
-    } 
-}; 
+    void setEdad(int edad) {
+        this->edad = edad;
+    }
 
-class ClienteSeguro : public Cliente { 
-public: 
-    ClienteSeguro(int dni, string nombre, int edad, int numCuenta) : Cliente(dni, nombre, edad, numCuenta) { 
-    } 
+    void setNumeroCuenta(int numeroCuenta) {
+        numCuenta = numeroCuenta;
+        Encriptar();
+    }
 
-    ~ClienteSeguro() {    
-    } 
+    virtual ~Cliente() { // destructor de la clase cliente (virtual porque la clase base tambien va a tener destructor)
+    }
+};
 
-    void Verificar() const { 
-        // Realizar verificación, si es necesario
-    } 
-}; 
+// Clase derivada "ClienteSeguro"
+class ClienteSeguro : public Cliente {
+public:
+    ClienteSeguro(int dni, string nombre, int edad, int numCuenta)
+        : Cliente(dni, nombre, edad, numCuenta) {}
 
-int main() { 
-    ClienteSeguro cliente(73378666, "Ana", 18, 12345); 
-    cout << "DNI: " << cliente.getDNI() << endl; 
-    cout << "Nombre: " << cliente.getNombre() << endl; 
-    cout << "Edad: " << cliente.getEdad() << endl; 
-    cout << "Numero de cuenta encriptado: " << cliente.getNumeroCuenta() << endl; 
+    ~ClienteSeguro() { // destructor
+    }
 
-    cliente.Verificar(); 
+    void Verificar() const {
+    }
+};
 
-    return 0; 
-}
-//las otras acitvidades
-#include <iostream> 
-#include <string> 
-using namespace std; 
+// Clase base "Persona"
+class Persona {
+public:
+    string nombre;
+    int edad;
+    string genero;
 
- 
-class Cliente{ 
-protected: 
-    int DNI; 
-    string nombre; 
-    int edad; 
-    int numCuenta; 
-    // Método protegido para encriptar la información antes de ser almacenada 
-    void Encriptar() const { 
-        // Aquí iría la lógica de encriptación 
+    Persona(string nombre, int edad, string genero) : nombre(nombre), edad(edad), genero(genero) {
+    }
 
-    } 
-public: 
-    Cliente(int dni, string nombre, int edad, int numCuenta): DNI(dni), nombre(nombre), edad(edad), numCuenta(numCuenta){ 
-        Encriptar(); 
-    } 
-    int getDNI()const{   //devuelve valor de un atributo privado 
-        return DNI; 
-    } 
+    void MostrarDatos() {
+        cout << "Su nombre es: " << nombre << endl;
+        cout << "Su edad es: " << edad << endl;
+        cout << "Su genero es: " << genero << endl;
+    }
+};
 
-    string getNombre()const{ 
-        return nombre; 
-    } 
-
-    int getEdad()const{ 
-        return edad; 
-    } 
-
-    int getNumeroCuenta()const{ 
-        return numCuenta; 
-    } 
-     
-
-    void setDNI(int dni){ //establece valor de un atributo   
-        DNI = dni; 
-    } 
-
-    void setNombre(string nombre){ 
-        this->nombre = nombre;  //usamos el this para distinguir los atributos de la función con los métodos de la clase 
-    } 
-
-    void setEdad(int edad){ 
-        this->edad = edad; 
-    } 
-    
-    void setNumeroCuenta(int numeroCuenta){ 
-        numCuenta = numeroCuenta; 
-    } 
-
-    virtual ~Cliente(){  //destructor de la clase cliente (virtual porque la clase base tambien va a tener destructor) 
-    } 
-
-}; 
-
-class ClienteSeguro: public Cliente{ 
-public: 
-
-    ClienteSeguro(int dni, string nombre, int edad, int numCuenta): Cliente(dni, nombre, edad, numCuenta){} 
-
-    ~ClienteSeguro(){    //destructor 
-
-    } 
-    void Verificar() const { 
-    } 
-
-}; 
-
-
-class Persona { 
-
-public: 
-    string nombre; 
-    int edad; 
-    string genero; 
-
-    Persona(string nombre, int edad, string genero) : nombre(nombre), edad(edad), genero(genero) { 
-    } 
-
-    void MostrarDatos() { 
-        cout << "Su nombre es: " << nombre << endl; 
-        cout << "Su edad es: " << edad << endl; 
-        cout << "Su genero es: " << genero << endl; 
-    } 
-
-}; 
-
- 
-
-class Profesional : public Persona { //herencia publica 
-    int codigo; 
-
-public: 
-    Profesional(int codigo, string nombre, int edad, string genero) : Persona(nombre, edad, genero), codigo(codigo) { 
-    } 
-
-}; 
-
- 
-int main() { 
-
-    string nombre; 
-    int edad; 
-    string genero; 
+// Clase derivada "Profesional"
+class Profesional : public Persona { // herencia publica
     int codigo;
-    cout << "Ingrese nombre: "; 
-    cin >> nombre; 
-    cout << "Ingrese edad: "; 
-    cin >> edad; 
-    cout << "Ingrese genero: "; 
-    cin >> genero; 
-    cout << "Ingrese codigo: "; 
-    cin >> codigo; 
 
-    Profesional arquitecto(codigo, nombre, edad, genero); 
-    arquitecto.MostrarDatos(); 
+public:
+    Profesional(int codigo, string nombre, int edad, string genero) : Persona(nombre, edad, genero), codigo(codigo) {
+    }
+};
 
-    return 0; 
+int main() {
+    string nombre;
+    int edad;
+    string genero;
+    int codigo;
 
-} 
+    cout << "Ingrese nombre: ";
+    cin >> nombre;
+    cout << "Ingrese edad: ";
+    cin >> edad;
+    cout << "Ingrese genero: ";
+    cin >> genero;
+    cout << "Ingrese codigo: ";
+    cin >> codigo;
+
+    Profesional arquitecto(codigo, nombre, edad, genero);
+    arquitecto.MostrarDatos();
+
+    return 0;
+};
+
 //herencia protegida ulti aparte
 
 
