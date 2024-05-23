@@ -63,8 +63,6 @@ void Triangulo :: calcularPerimetro(){
     cout << "El perimetro del triangulo es: " << lado1+lado2+lado3 << endl;
 }
 
-
-
 int main(){
 
     int opc;
