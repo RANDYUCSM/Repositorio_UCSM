@@ -130,4 +130,121 @@ int main(){
 }
 
 //Ejercicio 2
+#include <iostream>
+using namespace std;
+class Animales{
+    public:
+        //Metodos virtuales puros
+        virtual void Comer()=0; 
+        virtual void Dormir()=0;
+        virtual void Moverse()=0;
+        virtual ~Animales(){}   //Destructor virtual
+};
+class Mamiferos:public Animales{
+    public:
+        virtual void Detalles(){    //Metodo virtual que muestra los detalles en comun
+            cout<<"-Respiran por pulmones"<<endl;
+            cout<<"-Toman leche materna"<<endl;
+        }
+};
+class Aves:public Animales{
+    public:
+        virtual void Detalles(){    //Metodo virtual que muestra los detalles en comun
+            cout<<"-Tiene extremidades en forma de alas"<<endl;
+            cout<<"-Respiran por pulmones"<<endl;
+        }
+};
+class Reptiles:public Animales{
+    public:
+        virtual void Detalles()=0;  //Metodo virtual puro
+};
+class Cocodrilo:public Reptiles{
+    public:
+        //Implementacion y sobreescribimiento de los metodos virtuales de las clases base
+        void Comer(){
+            cout<<"-Son carnivoros, dependiendo de su tamanio se alimentan de animales de mayor volumen"<<endl;
+        }
+        void Dormir(){
+            cout<<"-Duermen con un ojo abierto para permanecer vigilantes"<<endl;
+        }
+        void Moverse(){
+            cout<<"-Se deslizan arrastrando su estomago y empujandose con los pies. Para recorrer distancias grandes, adoptan un paso alto, levantando el cuerpo del suelo y arrastrando la cola"<<endl;
+        }
+        void Detalles(){
+            cout<<"____Datos sobre el cocodrilo____"<<endl;
+            Comer();    //Se llaman a los metodos de la misma clase
+            Dormir();
+            Moverse();
+            cout<<"______________________________"<<endl;
+        }
+};
+class Aguila:public Aves{
+    public:
+        //Implementacion y sobreescribimiento de los metodos virtuales de las clases base
+        void Comer(){
+            cout<<"-Son carnivoros (ardillas,liebres,cuervos,etc)"<<endl;
+        }
+        void Dormir(){
+            cout<<"-Duermen con los ojos abiertos, lo que les permite detectar facilmente posibles peligros"<<endl;
+        }
+        void Moverse(){
+            cout<<"-Usan su fuerza solamente para iniciar el vuelo. Una vez alcanzada una buena altura, aprovechan la fuerza de los vientos y se dejan llevar por ellos"<<endl;
+        }
+        void Detalles(){
+            cout<<"____Datos sobre el aguila____"<<endl;
+            Comer();    //Se llaman a los metodos de la misma clase
+            Dormir();
+            Moverse();
+            Aves::Detalles();   //Refinamiento
+            cout<<"______________________________"<<endl;
+        }
+};
+class Caballo:public Mamiferos{
+    public:
+        //Implementacion y sobreescribimiento de los metodos virtuales de las clases base
+        void Comer(){
+            cout<<"-Son herbivoros (alfalfa,maiz,manzanas,etc)"<<endl;
+        }
+        void Dormir(){
+            cout<<"-Duermen parados en promedio tres horas"<<endl;
+        }
+        void Moverse(){
+            cout<<"-Se desplaza de tres formas diferentes: al paso, al trote y al galope"<<endl;
+        }
+        void Detalles(){
+            cout<<"____Datos sobre el caballo____"<<endl;
+            Comer();      //Se llaman a los metodos de la misma clase
+            Dormir();
+            Moverse();
+            Mamiferos::Detalles();    //Refinamiento
+            cout<<"______________________________"<<endl;
+        }
+};
+int main(){
+    int opc=0;
+    while (opc!=4){
+        cout<<"------------------"<<endl;
+        cout<<"Elija un animal"<<endl;
+        cout<<"1.Caballo\n2.Aguila\n3.Cocodrilo\n4.Salir"<<endl;
+        cout<<"------------------"<<endl;
+        cin>>opc;
+        if (opc==1){
+            Mamiferos *animal=new Caballo();    //Creacion dinamica de una referencia a un objeto
+            animal->Detalles();
+            delete animal;  //Se elimina el objeto
+        }
+        else if (opc==2){
+            Aves *animal=new Aguila();      //Creacion dinamica de una referencia a un objeto
+            animal->Detalles();
+            delete animal;  //Se elimina el objeto
+        }
+        else if(opc==3){
+            Reptiles* animal=new Cocodrilo();       //Creacion dinamica de una referencia a un objeto
+            animal->Detalles();
+            delete animal;  //Se elimina el objeto
+        }
+    }
+    return 0;
+}
+//Ejercicio 3
 
