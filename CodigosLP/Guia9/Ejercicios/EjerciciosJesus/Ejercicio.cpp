@@ -3,16 +3,18 @@
 using namespace std;
 class Figuras{
     public:
+    //Metodos virtuales puros
         virtual double CalcularArea()=0;
         virtual double CalcularPerimetro()=0;
         virtual void mostrarDetalles()=0;
-        virtual ~Figuras(){}
+        virtual ~Figuras(){}    //Destructor virtual
 };
 class Circulo:public Figuras{
     private:
         int radio;
     public:
         Circulo(int r):radio(r){}
+        //Implementacion de los metodos virtuales de la clase base
         double CalcularArea(){
             return 3.1416 * (radio*radio);
         }
@@ -91,9 +93,9 @@ int main(){
             int radio;
             cout<<"Ingrese el radio del circulo"<<endl;
             cin>>radio;
-            Figuras *figura=new Circulo(radio);
+            Figuras *figura=new Circulo(radio); //Creacion dinamica de una referencia a un objeto
             figura->mostrarDetalles();
-            delete figura;
+            delete figura;  //Se elimina el objeto
         }
         else if (opc==2){
             int l1,l2,l3,altura;
@@ -103,25 +105,25 @@ int main(){
             cin>>altura;
             cout<<"Ingrese los lados laterales del triangulo"<<endl;
             cin>>l2>>l3;
-            Figuras *figura=new Triangulo(l1,altura,l2,l3);
+            Figuras *figura=new Triangulo(l1,altura,l2,l3);     //Creacion dinamica de una referencia a un objeto
             figura->mostrarDetalles();
-            delete figura;
+            delete figura;  //Se elimina el objeto
         }
         else if(opc==3){
             int lado;
             cout<<"Ingrese un lado del cuadrado"<<endl;
             cin>>lado;
-            Figuras *figura=new Cuadrado(lado);
+            Figuras *figura=new Cuadrado(lado);     //Creacion dinamica de una referencia a un objeto
             figura->mostrarDetalles();
-            delete figura;
+            delete figura;  //Se elimina el objeto
         }
         else if(opc==4){
             int base,altura;
             cout<<"Ingrese la base y altura del rectangulo"<<endl;
             cin>>base>>altura;
-            Figuras *figura= new Rectangulo(base,altura);
+            Figuras *figura= new Rectangulo(base,altura);   //Creacion dinamica de una referencia a un objeto
             figura->mostrarDetalles();
-            delete figura;
+            delete figura;  //Se elimina el objeto
         }
     }
     return 0;
