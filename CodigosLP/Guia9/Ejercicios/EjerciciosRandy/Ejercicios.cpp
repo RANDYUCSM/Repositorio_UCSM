@@ -305,7 +305,6 @@ int main() {
 #include <string>
 using namespace std;
 
-// Clase base abstracta Empleado
 class Empleado {
 protected:
     string nombre;
@@ -319,7 +318,6 @@ public:
     }
 };
 
-// Clase derivada Asalariado
 class Asalariado : public Empleado {
 public:
     Asalariado(string n, double salario) : Empleado(n, salario) {}
@@ -332,7 +330,6 @@ public:
     }
 };
 
-// Clase derivada PorHora
 class PorHora : public Empleado {
 private:
     int horasTrabajadas;
@@ -364,7 +361,6 @@ public:
     }
 };
 
-// Función para mostrar el menú y gestionar los empleados
 void menu() {
     const int MAX_EMPLEADOS = 10;
     Empleado* empleados[MAX_EMPLEADOS];
@@ -452,5 +448,277 @@ int main() {
     menu();
     return 0;
 }
+//EJER 4 
+#include <iostream>
+#include <string>
+using namespace std;
 
+class Personaje {
+public:
+    static const int SALUD_GUERRERO = 150;
+    static const int SALUD_MAGO = 100;
+    static const int SALUD_ARQUERO = 120;
+
+    string nombre;
+    int salud;
+
+    Personaje(const string& nombre, int salud) : nombre(nombre), salud(salud) {}
+
+    virtual void atacar(Personaje& objetivo) = 0;
+    virtual void defender() = 0;
+    virtual void habilidadEspecial(Personaje& objetivo) = 0;
+
+    void mostrarSalud() {
+        cout << nombre << " tiene " << salud << " puntos de salud." << endl;
+    }
+
+    virtual ~Personaje() {}
+};
+
+class Guerrero : public Personaje {
+public:
+    Guerrero(const string& nombre) : Personaje(nombre, SALUD_GUERRERO) {}
+
+    void atacar(Personaje& objetivo) override {
+        cout << nombre << " ataca con su espada a " << objetivo.nombre << endl;
+        objetivo.salud -= 20;
+    }
+
+    void defender() override {
+        cout << nombre << " se defiende con su escudo." << endl;
+    }
+
+    void habilidadEspecial(Personaje& objetivo) override {
+        cout << nombre << " usa su habilidad Warrior's Fury" << endl;
+        objetivo.salud -= 50;
+    }
+};
+
+class Mago : public Personaje {
+public:
+    Mago(const string& nombre) : Personaje(nombre, SALUD_MAGO) {}
+
+    void atacar(Personaje& objetivo) override {
+        cout << nombre << " lanza un hechizo a " << objetivo.nombre << endl;
+        objetivo.salud -= 15;
+    }
+
+    void defender() override {
+        cout << nombre << " crea un escudo magico." << endl;
+    }
+
+    void habilidadEspecial(Personaje& objetivo) override {
+        cout << nombre << " usa su habilidad cutting water" << endl;
+        objetivo.salud -= 60;
+    }
+};
+
+class Arquero : public Personaje {
+public:
+    Arquero(const string& nombre) : Personaje(nombre, SALUD_ARQUERO) {}
+
+    void atacar(Personaje& objetivo) override {
+        cout << nombre << " dispara una flecha a " << objetivo.nombre << endl;
+        objetivo.salud -= 18;
+    }
+
+    void defender() override {
+        cout << nombre << " se oculta en las rocas." << endl;
+    }
+
+    void habilidadEspecial(Personaje& objetivo) override {
+        cout << nombre << " usa su habilidad flecha de luz" << endl;
+        objetivo.salud -= 40;
+    }
+};
+
+int main() {
+    Guerrero guerrero("WILLI");
+    Mago mago("VEGETA ");
+    Arquero arquero("Iruma");
+
+    Personaje* personajes[] = { &guerrero, &mago, &arquero };
+
+    personajes[0]->atacar(*personajes[1]);
+    personajes[1]->defender();
+    personajes[2]->habilidadEspecial(*personajes[0]);
+
+    // Mostrar salud 
+    for (auto* p : personajes) {
+        p->mostrarSalud();
+    }
+
+    return 0;
+}
+//EJER5
+#include <iostream>
+#include <string>
+using namespace std;
+
+const int MAX_PRODUCTOS = 100;
+
+class Producto {
+protected:
+    string nombre;
+    double precio;
+    int cantidad;
+
+public:
+    Producto(const string& nombre, double precio, int cantidad)
+        : nombre(nombre), precio(precio), cantidad(cantidad) {}
+
+    virtual double calcularValorInventario() const = 0;
+    virtual void aplicarDescuento(double porcentaje) = 0;
+
+    virtual ~Producto() {}
+};
+
+class Electronico : public Producto {
+public:
+    Electronico(const string& nombre, double precio, int cantidad)
+        : Producto(nombre, precio, cantidad) {}
+
+    double calcularValorInventario() const override {
+        return precio * cantidad;
+    }
+
+    void aplicarDescuento(double porcentaje) override {
+        precio -= precio * porcentaje / 100;
+    }
+};
+
+class Ropa : public Producto {
+public:
+    Ropa(const string& nombre, double precio, int cantidad)
+        : Producto(nombre, precio, cantidad) {}
+
+    double calcularValorInventario() const override {
+        return precio * cantidad;
+    }
+
+    void aplicarDescuento(double porcentaje) override {
+        precio -= precio * porcentaje / 100;
+    }
+};
+
+class Alimento : public Producto {
+public:
+    Alimento(const string& nombre, double precio, int cantidad)
+        : Producto(nombre, precio, cantidad) {}
+
+    double calcularValorInventario() const override {
+        return precio * cantidad;
+    }
+
+    void aplicarDescuento(double porcentaje) override {
+        precio -= precio * porcentaje / 100;
+    }
+};
+
+class GestionInventario {
+private:
+    Producto* productos[MAX_PRODUCTOS];
+    int numProductos;
+
+public:
+    GestionInventario() : numProductos(0) {}
+
+    void agregarProducto(Producto* producto) {
+        if (numProductos < MAX_PRODUCTOS) {
+            productos[numProductos++] = producto;
+        } else {
+            cout << "Error: El inventario está lleno." << endl;
+        }
+    }
+
+    double calcularValorTotalInventario() const {
+        double total = 0;
+        for (int i = 0; i < numProductos; ++i) {
+            total += productos[i]->calcularValorInventario();
+        }
+        return total;
+    }
+
+    void aplicarDescuentos(double porcentaje) {
+        for (int i = 0; i < numProductos; ++i) {
+            productos[i]->aplicarDescuento(porcentaje);
+        }
+    }
+
+    ~GestionInventario() {
+        for (int i = 0; i < numProductos; ++i) {
+            delete productos[i];
+        }
+    }
+};
+
+void mostrarMenu() {
+    cout << "1. Agregar producto" << endl;
+    cout << "2. Calcular valor total del inventario" << endl;
+    cout << "3. Aplicar descuento" << endl;
+    cout << "4. Salir" << endl;
+    cout << "Seleccione una opción: ";
+}
+
+int main() {
+    GestionInventario inventario;
+    int opcion;
+
+    do {
+        mostrarMenu();
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1: {
+                int tipoProducto;
+                string nombre;
+                double precio;
+                int cantidad;
+
+                cout << "Seleccione el tipo de producto (1. Electronico, 2. Ropa, 3. Alimento): ";
+                cin >> tipoProducto;
+
+                cout << "Ingrese el nombre del producto: ";
+                cin >> nombre;
+                cout << "Ingrese el precio del producto: ";
+                cin >> precio;
+                cout << "Ingrese la cantidad del producto: ";
+                cin >> cantidad;
+
+                if (tipoProducto == 1) {
+                    inventario.agregarProducto(new Electronico(nombre, precio, cantidad));
+                } else if (tipoProducto == 2) {
+                    inventario.agregarProducto(new Ropa(nombre, precio, cantidad));
+                } else if (tipoProducto == 3) {
+                    inventario.agregarProducto(new Alimento(nombre, precio, cantidad));
+                } else {
+                    cout << "Tipo de producto no válido." << endl;
+                }
+                break;
+            }
+            case 2: {
+                cout << "Valor total del inventario: $" << inventario.calcularValorTotalInventario() << endl;
+                break;
+            }
+            case 3: {
+                double porcentaje;
+                cout << "Ingrese el porcentaje de descuento: ";
+                cin >> porcentaje;
+                inventario.aplicarDescuentos(porcentaje);
+                cout << "Descuento aplicado." << endl;
+                break;
+            }
+            case 4: {
+                cout << "Saliendo..." << endl;
+                break;
+            }
+            default: {
+                cout << "Opción no válida." << endl;
+                break;
+            }
+        }
+    } while (opcion != 4);
+
+    return 0;
+}
 
